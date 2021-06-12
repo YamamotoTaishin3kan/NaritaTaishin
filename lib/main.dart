@@ -19,7 +19,7 @@ class NotificationCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ButtonState>(
+    return ChangeNotifierProvider(
       create: (_) => ButtonState(),
       child: MaterialApp(
         title: "Baby,it's you!!",
