@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+export 'package:provider/provider.dart';
 
 class SelectActionWidget extends StatelessWidget {
   @override
