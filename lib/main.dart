@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'Model/View/SelectActionWidget.dart';
+import 'Model/Widget/SelectActionWidget.dart';
 export 'package:provider/provider.dart';
+import 'Model/Application/ScreenState.dart';
 
 void main() {
   runApp(const NotificationCreator());
-}
-
-class ButtonState extends ChangeNotifier {
-  bool isEnabled = true;
-  void increment(bool isEnable) {
-    isEnabled = isEnable;
-    notifyListeners();
-  }
 }
 
 class NotificationCreator extends StatelessWidget {
@@ -20,12 +14,10 @@ class NotificationCreator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ButtonState(),
+      create: (context) => ScreenState(),
       child: MaterialApp(
         title: "Baby,it's you!!",
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-        ),
+        theme: ThemeData(primarySwatch: Colors.blue),
         home: SelectActionWidget(),
       ),
     );
