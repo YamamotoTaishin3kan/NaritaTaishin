@@ -28,7 +28,9 @@ class CreateButton extends StatelessWidget {
       style: TextButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.read<ButtonState>().increment(!textValue);
+      },
       child: Text(textValue.toString()),
     );
   }
