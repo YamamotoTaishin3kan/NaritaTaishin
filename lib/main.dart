@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
-import 'Model/View/SelectActionWidget.dart';
+import 'Model/Widget/SelectActionWidget.dart';
 export 'package:provider/provider.dart';
+import 'Model/Application/ScreenState.dart';
 
 void main() {
   runApp(const NotificationCreator());
 }
 
-class ButtonState extends ChangeNotifier {
-  bool isEnabled = true;
-  void increment(bool isEnable) {
-    isEnabled = isEnable;
-    notifyListeners();
+class Screen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => ScreenState(),
+      child: MaterialApp(
+        title: "Baby,it's you!!",
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: NotificationCreator(),
+      ),
+    );
   }
 }
 
@@ -19,15 +26,11 @@ class NotificationCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ButtonState(),
-      child: MaterialApp(
-        title: "Baby,it's you!!",
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-        ),
-        home: SelectActionWidget(),
-      ),
+    return MaterialApp(
+      title: "Baby,it's you!!",
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: context
+          .select((ScreenState screenState) => screenState.currentScreen),
     );
   }
 }
