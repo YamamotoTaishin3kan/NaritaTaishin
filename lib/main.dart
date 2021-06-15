@@ -10,13 +10,10 @@ void main() {
 class Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ScreenState(),
-      child: MaterialApp(
-        title: "Baby,it's you!!",
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: NotificationCreator(),
-      ),
+    return MaterialApp(
+      title: "Baby,it's you!!",
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: NotificationCreator(),
     );
   }
 }
@@ -26,11 +23,22 @@ class NotificationCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Baby,it's you!!",
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: context
-          .select((ScreenState screenState) => screenState.currentScreen),
+    return ChangeNotifierProvider(
+      create: (_) => ScreenState(),
+      child: MaterialApp(
+        title: "Baby,it's you!!",
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: _NotificationCreator(),
+      ),
     );
+  }
+}
+
+class _NotificationCreator extends StatelessWidget {
+  const _NotificationCreator({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return context.watch<ScreenState>().currentScreen;
   }
 }

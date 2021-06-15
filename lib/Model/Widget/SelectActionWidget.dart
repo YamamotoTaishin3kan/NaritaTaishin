@@ -1,18 +1,22 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../Application/ScreenState.dart';
 export 'package:provider/provider.dart';
 
 class SelectActionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Row(
-          children: <Widget>[
-            TurnOnButton(),
-            const TurnOffButton(),
-          ],
+    return ChangeNotifierProvider(
+      create: (_) => ScreenState(),
+      child: Scaffold(
+        body: Center(
+          child: Row(
+            children: <Widget>[
+              TurnOnButton(),
+              const TurnOffButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -20,13 +24,16 @@ class SelectActionWidget extends StatelessWidget {
 }
 
 class TurnOnButton extends StatelessWidget {
-  ScreenState screenState = ScreenState();
+  final ScreenState screenState = ScreenState();
 
   @override
   Widget build(BuildContext context) {
     //final textValue = context.watch<ButtonState>().isEnabled;
     return ElevatedButton(
-      onPressed: screenState.changeToNotificationCreateWidget,
+      onPressed: () {
+        print('object');
+        context.read<ScreenState>().changeToNotificationCreateWidget();
+      },
       child: const Text("通知を作る"),
     );
   }
